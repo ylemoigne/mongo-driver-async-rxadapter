@@ -11,7 +11,12 @@ Dependency.
 
 Maven
 
-    TODO
+    <dependency>
+      <groupId>fr.javatic.mongo</groupId>
+      <artifactId>mongo-driver-async-rxadapter</artifactId>
+      <version>3.0.0-beta3__0.1</version>
+      <scope>compile</scope>
+    </dependency>
 
 Gradle
 
@@ -22,5 +27,5 @@ Gradle
     }
 
     dependencies {
-        compile 'fr.javatic.stuf:stuf:0.3'
+        compile 'fr.javatic.mongo:mongo-driver-async-rxadapter:3.0.0-beta3__0.1'
     }
