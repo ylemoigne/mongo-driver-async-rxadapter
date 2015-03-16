@@ -38,14 +38,14 @@ dependencies {
     compile "io.reactivex:rxjava:1.0.6"
 }
 
-tasks.withType(Javadoc) {
-    options.links('http://docs.oracle.com/javase/8/docs/api/')
-}
-
-task javadocJar(type: Jar, dependsOn: Javadoc) {
-    classifier = 'javadoc'
-    from 'build/docs/javadoc'
-}
+//tasks.withType(Javadoc) {
+//    options.links('http://docs.oracle.com/javase/8/docs/api/')
+//}
+//
+//task javadocJar(type: Jar, dependsOn: Javadoc) {
+//    classifier = 'javadoc'
+//    from 'build/docs/javadoc'
+//}
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
