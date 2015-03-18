@@ -39,7 +39,6 @@ class Utils {
             if (error != null) {
                 subscriber.onError(error);
             } else {
-                subscriber.onNext(null);
                 subscriber.onCompleted();
             }
         };

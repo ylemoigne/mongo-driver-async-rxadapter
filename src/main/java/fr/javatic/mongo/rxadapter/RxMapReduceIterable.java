@@ -16,7 +16,6 @@
 
 package fr.javatic.mongo.rxadapter;
 
-import com.mongodb.async.SingleResultCallback;
 import com.mongodb.async.client.MapReduceIterable;
 import com.mongodb.client.model.MapReduceAction;
 import org.bson.conversions.Bson;
@@ -24,7 +23,7 @@ import rx.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-import static fr.javatic.mongo.rxadapter.Utils.resultHandler;
+import static fr.javatic.mongo.rxadapter.Utils.voidResultHandler;
 
 public class RxMapReduceIterable<T> extends RxMongoIterable<T> {
     private final MapReduceIterable<T> delegate;
@@ -86,7 +85,7 @@ public class RxMapReduceIterable<T> extends RxMongoIterable<T> {
         return new RxMapReduceIterable<>(delegate.nonAtomic(nonAtomic));
     }
 
-    public Observable<Void> toCollection(SingleResultCallback<Void> callback) {
-        return Observable.create(subscriber -> delegate.toCollection(resultHandler(subscriber)));
+    public Observable<Void> toCollection() {
+        return Observable.create(subscriber -> delegate.toCollection(voidResultHandler(subscriber)));
     }
 }

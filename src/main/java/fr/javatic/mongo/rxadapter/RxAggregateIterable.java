@@ -16,13 +16,12 @@
 
 package fr.javatic.mongo.rxadapter;
 
-import com.mongodb.async.SingleResultCallback;
 import com.mongodb.async.client.AggregateIterable;
 import rx.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-import static fr.javatic.mongo.rxadapter.Utils.resultHandler;
+import static fr.javatic.mongo.rxadapter.Utils.voidResultHandler;
 
 public class RxAggregateIterable<T> extends RxMongoIterable<T> {
     private final AggregateIterable<T> delegate;
@@ -44,7 +43,7 @@ public class RxAggregateIterable<T> extends RxMongoIterable<T> {
         return new RxAggregateIterable<>(delegate.useCursor(useCursor));
     }
 
-    public Observable<Void> toCollection(SingleResultCallback<Void> callback) {
-        return Observable.create(subscriber -> delegate.toCollection(resultHandler(subscriber)));
+    public Observable<Void> toCollection() {
+        return Observable.create(subscriber -> delegate.toCollection(voidResultHandler(subscriber)));
     }
 }

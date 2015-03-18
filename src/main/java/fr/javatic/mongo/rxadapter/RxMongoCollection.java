@@ -32,6 +32,7 @@ import rx.Observable;
 import java.util.List;
 
 import static fr.javatic.mongo.rxadapter.Utils.resultHandler;
+import static fr.javatic.mongo.rxadapter.Utils.voidResultHandler;
 
 public class RxMongoCollection<T> {
     private final MongoCollection<T> delegate;
@@ -138,18 +139,18 @@ public class RxMongoCollection<T> {
 
     public Observable<Void> insertOne(T t) {
         return Observable.create(subscriber -> delegate.insertOne(t,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<Void> insertMany(List<? extends T> ts) {
         return Observable.create(subscriber -> delegate.insertMany(ts,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<Void> insertMany(List<? extends T> ts,
                                        InsertManyOptions options) {
         return Observable.create(subscriber -> delegate.insertMany(ts,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<DeleteResult> deleteOne(Bson filter) {
@@ -236,17 +237,17 @@ public class RxMongoCollection<T> {
 
     public Observable<Void> dropCollection() {
         return Observable.create(subscriber -> delegate.dropCollection(
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<Void> createIndex(Bson key) {
         return Observable.create(subscriber -> delegate.createIndex(key,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<Void> createIndex(Bson key, CreateIndexOptions options) {
         return Observable.create(subscriber -> delegate.createIndex(key, options,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public RxListIndexesIterable<Document> listIndexes() {
@@ -259,23 +260,23 @@ public class RxMongoCollection<T> {
 
     public Observable<Void> dropIndex(String indexName) {
         return Observable.create(subscriber -> delegate.dropIndex(indexName,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<Void> dropIndexes() {
         return Observable.create(subscriber -> delegate.dropIndexes(
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<Void> renameCollection(MongoNamespace newCollectionNamespace) {
         return Observable.create(subscriber -> delegate.renameCollection(newCollectionNamespace,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
     public Observable<Void> renameCollection(MongoNamespace newCollectionNamespace,
                                              RenameCollectionOptions options) {
         return Observable.create(subscriber -> delegate.renameCollection(newCollectionNamespace, options,
-            resultHandler(subscriber)));
+            voidResultHandler(subscriber)));
     }
 
 
