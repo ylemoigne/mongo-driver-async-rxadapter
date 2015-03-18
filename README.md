@@ -3,7 +3,7 @@ RxJava adapter for Mongo 3 async driver
 
 Usage
 ------
-    new RxMongoCollection<>(myMongoCollection)
+    new RxMongoClient(mongoClient)
 
 
 Dependency.
@@ -34,3 +34,4 @@ Changelog.
 ------
 0.1 : Initial Release
 0.2 : Fixed Void callback to return empty Observable (previous returned a single item Observable with null value)
+0.3 : Add wrappers to top level mongo (RxMongoClient)
