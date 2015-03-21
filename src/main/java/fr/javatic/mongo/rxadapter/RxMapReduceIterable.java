@@ -86,6 +86,6 @@ public class RxMapReduceIterable<T> extends RxMongoIterable<T> {
     }
 
     public Observable<Void> toCollection() {
-        return Observable.create(subscriber -> delegate.toCollection(voidResultHandler(subscriber)));
+        return Observable.create(subscriber -> delegate.toCollection(voidResultHandler(subscriber, null)));
     }
 }

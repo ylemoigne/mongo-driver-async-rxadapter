@@ -137,20 +137,20 @@ public class RxMongoCollection<T> {
             subscriber)));
     }
 
-    public Observable<Void> insertOne(T t) {
+    public Observable<T> insertOne(T t) {
         return Observable.create(subscriber -> delegate.insertOne(t,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, t)));
     }
 
-    public Observable<Void> insertMany(List<? extends T> ts) {
+    public Observable<List<? extends T>> insertMany(List<? extends T> ts) {
         return Observable.create(subscriber -> delegate.insertMany(ts,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, ts)));
     }
 
-    public Observable<Void> insertMany(List<? extends T> ts,
+    public Observable<List<? extends T>> insertMany(List<? extends T> ts,
                                        InsertManyOptions options) {
         return Observable.create(subscriber -> delegate.insertMany(ts,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, ts)));
     }
 
     public Observable<DeleteResult> deleteOne(Bson filter) {
@@ -237,17 +237,17 @@ public class RxMongoCollection<T> {
 
     public Observable<Void> dropCollection() {
         return Observable.create(subscriber -> delegate.dropCollection(
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, null)));
     }
 
-    public Observable<Void> createIndex(Bson key) {
+    public Observable<Bson> createIndex(Bson key) {
         return Observable.create(subscriber -> delegate.createIndex(key,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, key)));
     }
 
-    public Observable<Void> createIndex(Bson key, CreateIndexOptions options) {
+    public Observable<Bson> createIndex(Bson key, CreateIndexOptions options) {
         return Observable.create(subscriber -> delegate.createIndex(key, options,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, key)));
     }
 
     public RxListIndexesIterable<Document> listIndexes() {
@@ -258,25 +258,25 @@ public class RxMongoCollection<T> {
         return new RxListIndexesIterable<>(delegate.listIndexes(resultClass));
     }
 
-    public Observable<Void> dropIndex(String indexName) {
+    public Observable<String> dropIndex(String indexName) {
         return Observable.create(subscriber -> delegate.dropIndex(indexName,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, indexName)));
     }
 
     public Observable<Void> dropIndexes() {
         return Observable.create(subscriber -> delegate.dropIndexes(
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, null)));
     }
 
-    public Observable<Void> renameCollection(MongoNamespace newCollectionNamespace) {
+    public Observable<MongoNamespace> renameCollection(MongoNamespace newCollectionNamespace) {
         return Observable.create(subscriber -> delegate.renameCollection(newCollectionNamespace,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, newCollectionNamespace)));
     }
 
-    public Observable<Void> renameCollection(MongoNamespace newCollectionNamespace,
+    public Observable<MongoNamespace> renameCollection(MongoNamespace newCollectionNamespace,
                                              RenameCollectionOptions options) {
         return Observable.create(subscriber -> delegate.renameCollection(newCollectionNamespace, options,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, newCollectionNamespace)));
     }
 
 

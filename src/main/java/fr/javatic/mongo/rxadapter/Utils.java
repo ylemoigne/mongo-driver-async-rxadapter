@@ -28,17 +28,30 @@ class Utils {
             if (error != null) {
                 subscriber.onError(error);
             } else {
-                subscriber.onNext(success);
+                if (success != null) {
+                    subscriber.onNext(success);
+                }
                 subscriber.onCompleted();
             }
         };
     }
 
-    public static SingleResultCallback<Void> voidResultHandler(Subscriber<?> subscriber) {
+//    public static SingleResultCallback<Void> voidResultHandler(Subscriber<?> subscriber) {
+//        return (success, error) -> {
+//            if (error != null) {
+//                subscriber.onError(error);
+//            } else {
+//                subscriber.onCompleted();
+//            }
+//        };
+//    }
+
+    public static <T> SingleResultCallback<Void> voidResultHandler(Subscriber<? super T> subscriber, T value) {
         return (success, error) -> {
             if (error != null) {
                 subscriber.onError(error);
             } else {
+                subscriber.onNext(value);
                 subscriber.onCompleted();
             }
         };

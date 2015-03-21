@@ -100,8 +100,8 @@ public class RxMongoDatabase {
             resultHandler(subscriber)));
     }
 
-    public Observable<Void> dropDatabase(SingleResultCallback<Void> callback) {
-        return Observable.create(subscriber -> delegate.dropDatabase(voidResultHandler(subscriber)));
+    public Observable<Void> dropDatabase() {
+        return Observable.create(subscriber -> delegate.dropDatabase(voidResultHandler(subscriber, null)));
     }
 
     public RxMongoIterable<String> listCollectionNames() {
@@ -116,15 +116,15 @@ public class RxMongoDatabase {
         return new RxListCollectionsIterable<>(delegate.listCollections(resultClass));
     }
 
-    public Observable<Void> createCollection(String collectionName) {
+    public Observable<String> createCollection(String collectionName) {
         return Observable.create(subscriber -> delegate.createCollection(collectionName,
-            voidResultHandler(subscriber)));
+            voidResultHandler(subscriber, collectionName)));
     }
 
-    public Observable<Void> createCollection(String collectionName,
+    public Observable<String> createCollection(String collectionName,
                                              CreateCollectionOptions options,
                                              SingleResultCallback<Void> callback) {
         return Observable.create(subscriber -> delegate.createCollection(collectionName, options, voidResultHandler(
-            subscriber)));
+            subscriber, collectionName)));
     }
 }

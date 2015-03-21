@@ -25,7 +25,6 @@ import rx.Observable;
 import java.util.Collection;
 
 import static fr.javatic.mongo.rxadapter.Utils.resultHandler;
-import static fr.javatic.mongo.rxadapter.Utils.voidResultHandler;
 
 public class RxMongoIterable<T> {
     private final MongoIterable<T> delegate;
@@ -39,7 +38,13 @@ public class RxMongoIterable<T> {
     }
 
     public Observable<T> toObservable() {
-        return Observable.create(subscriber -> delegate.forEach(subscriber::onNext, voidResultHandler(subscriber)));
+        return Observable.create(subscriber -> delegate.forEach(subscriber::onNext, (result, t) -> {
+            if (t != null) {
+                subscriber.onError(t);
+            } else {
+                subscriber.onCompleted();
+            }
+        }));
     }
 
     public <A extends Collection<? super T>> Observable<A> into(A target, SingleResultCallback<A> callback) {
