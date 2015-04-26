@@ -1,3 +1,9 @@
+# DISCONTINUED
+
+Good news, mongodb now provide an rx driver : https://github.com/mongodb/mongo-java-driver-rx
+This project is now dead, please use mongo-java-driver-rx
+
+
 # mongo-driver-async-rxadapter
 RxJava adapter for Mongo 3 async driver
 
